@@ -1,0 +1,105 @@
+package Projects;
+
+import java.awt.*;
+import java.net.*;
+import java.io.*;
+import java.awt.event.*;
+
+public class User02 extends Frame implements Runnable{
+    TextField textfield;
+    TextArea textarea;
+    Button send;
+    Label label;
+
+    Socket socket;
+
+    DataInputStream datainputstream;
+    DataOutputStream dataoutputstream;
+
+    Thread chat;
+
+    User02(){
+
+
+        label=new Label("User 02");
+        label.setBounds(100,80,100,20);
+        textfield=new TextField();
+        textfield.setBounds(100,420,300,30);
+        textarea =new TextArea();
+        textarea.setBounds(100,100,300,300);
+        send = new Button("Send");
+        send.setBounds(410,420,40,30);
+
+
+
+        add(textfield);
+        add(textarea);
+        add(label);
+        add(send);
+
+
+
+        try{
+
+            socket=new Socket("localhost",333);
+
+            datainputstream =new DataInputStream(socket.getInputStream());
+            dataoutputstream=new DataOutputStream(socket.getOutputStream());
+        }
+        catch(Exception e){
+
+        }
+
+
+        send.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                String msg=textfield.getText();
+                textarea.append("User 2:"+msg+"\n");
+                textfield.setText("");
+                try{
+                    dataoutputstream.writeUTF(msg);
+                    dataoutputstream.flush();
+
+                }
+                catch(Exception obj){
+
+                }
+            }
+        });
+
+        chat=new Thread(this);
+        chat.setDaemon(true);
+        chat.start();
+
+
+        setLayout(null);
+        setTitle("Chat App");
+        setSize(500,500);
+        setVisible(true);
+
+    }
+
+    public static void main(String [] args){
+
+
+        new User02();
+    }
+    public void run(){
+        while(true){
+            try{
+                String msg=datainputstream.readUTF();
+                textarea.append("User 1: "+msg+"\n");
+            }
+            catch(Exception e){
+
+            }
+        }
+    }
+
+}
+
+
+
+
+
