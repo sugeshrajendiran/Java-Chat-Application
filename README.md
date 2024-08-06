@@ -1,4 +1,4 @@
-*Java Chat Application*
+Java Chat Application
 
 Overview:
 This project is a simple chat application built using Java. It leverages Swing for the graphical user interface and Java Socket programming to enable real-time communication between two users. The application consists of two main components: User01 and User02, representing the two chat participants.
@@ -13,22 +13,19 @@ Installation and Setup:
 Prerequisites
 Java Development Kit (JDK) 8 or later
 
-Cloning the Repository bash
-Copy code:
-git clone https://github.com/yourusername/Java-Chat-Application.git
+Cloning the Repository :
+git clone https://github.com/sugeshrajendiran/Java-Chat-Application.git
+
 cd Java-Chat-Application
-Running the Application
+
 
 Compile the Java files:
-Copy code:
 javac Projects/User01.java Projects/User02.java
 
 Run the server (User01):
-Copy code
 java Projects.User01
 
 Run the client (User02) in a separate terminal or on another machine:
-Copy code
 java Projects.User02
 
 Usage:
